@@ -1,19 +1,20 @@
-import { useState } from 'react'
-import { BrowserRouter, Routes, Route } from "react-router";
-import './App.css'
-import Home from './Pages/Home';
+import { BrowserRouter as Router, Route, Routes } from "react-router";
+import Home from "./Pages/Home";
+import Login from "./pages/login";
+import Signup from "./pages/signup";
+import Dashboard from "./pages/dashboard";
 
 function App() {
-
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-        </Routes>
-      </BrowserRouter>
-    </>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/Dashboard" element={<Dashboard />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;

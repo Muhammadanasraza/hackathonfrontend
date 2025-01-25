@@ -1,120 +1,91 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from "react";
+import { Link } from "react-router"; // For navigation between pages
 
-const Home = () => {
-  const [tasks, setTasks] = useState([]);
-  const [newTask, setNewTask] = useState('');
-  const [newTaskDescription, setNewTaskDescription] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [refresh, setRefresh] = useState(false);
+function Home() {
+  const [userId, setUserId] = useState("");
+  const [userDetails, setUserDetails] = useState(null);
 
-  // Fetch tasks when component mounts or refresh state changes
-  useEffect(() => {
-    const fetchTasks = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch("http://localhost:4000/api/v1/tasks/available");
-        const data = await response.json();
-        setTasks(data);
-      } catch (error) {
-        console.error("Error fetching tasks:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchTasks();
-  }, [refresh]);
-
-  // Handle task addition
-  const handleAddTask = async (e) => {
-    e.preventDefault();
-    if (newTask.trim()) {
-      const newTaskObj = {
-        title: newTask,
-        description: newTaskDescription, // Added description from the form
-        status: 'pending' // Default status is 'pending'
-      };
-      try {
-        const response = await fetch("http://localhost:4000/api/v1/tasks/", {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(newTaskObj)
-        });
-        const addedTask = await response.json();
-        setTasks((prevTasks) => [...prevTasks, addedTask]);
-        setNewTask('');
-        setNewTaskDescription('');
-        setRefresh(!refresh);  // Trigger re-fetch of tasks
-      } catch (error) {
-        console.error("Error adding task:", error);
-      }
-    }
+  // Dummy data for demonstration
+  const mockData = {
+    "123": { name: "John Doe", age: 30, email: "john.doe@example.com" },
+    "456": { name: "Jane Smith", age: 25, email: "jane.smith@example.com" },
   };
 
-  // Toggle task status between 'pending', 'in-progress', and 'completed'
-  const handleToggleStatus = async (taskId, currentStatus) => {
-    const updatedStatus = currentStatus === 'pending'
-      ? 'in-progress'
-      : currentStatus === 'in-progress'
-      ? 'completed'
-      : 'pending';
-    try {
-      const response = await fetch(`http://localhost:4000/api/v1/tasks/${taskId}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status: updatedStatus }),
-      });
-      const updatedTask = await response.json();
-      setTasks((prevTasks) => prevTasks.map(task => task.id === taskId ? updatedTask : task));
-    } catch (error) {
-      console.error("Error updating task status:", error);
+  const handleSearch = () => {
+    if (mockData[userId]) {
+      setUserDetails(mockData[userId]);
+    } else {
+      setUserDetails({ error: "User not found" });
     }
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg">
-      <h1 className="text-2xl font-semibold text-center text-gray-800 mb-6">Task Manager</h1>
+    <div>
+      {/* Header Section */}
+      <header className="bg-blue-500 text-white py-4">
+        <div className="max-w-7xl mx-auto flex justify-between items-center px-6">
+          <h1 className="text-2xl font-bold">Beneficiary Management</h1>
 
-      {loading ? (
-        <p className="text-center text-gray-500">Loading tasks...</p>
-      ) : (
-        <div>
-          <ul className="space-y-4">
-            {tasks.map((task,key) => (
-              <li key={key} className={`flex justify-between items-center p-4 rounded-lg shadow-md 
-                ${task.status === 'pending' ? 'bg-yellow-100' : task.status === 'in-progress' ? 'bg-blue-100' : 'bg-green-100'}`}>
-                <span className="text-gray-700">{task.title}</span>
-                <button 
-                  onClick={() => handleToggleStatus(task.id, task.status)}
-                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-                  Mark as {task.status === 'pending' ? 'In Progress' : task.status === 'in-progress' ? 'Completed' : 'Pending'}
-                </button>
-              </li>
-            ))}
-          </ul>
-
-          <form onSubmit={handleAddTask} className="mt-6 flex flex-col space-y-2">
-            <input
-              type="text"
-              placeholder="Add new task title"
-              value={newTask}
-              onChange={(e) => setNewTask(e.target.value)}
-              className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <textarea
-              placeholder="Add description (optional)"
-              value={newTaskDescription}
-              onChange={(e) => setNewTaskDescription(e.target.value)}
-              className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <button type="submit" className="px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600">
-              Add Task
-            </button>
-          </form>
+          {/* Navigation Buttons */}
+          <nav className="space-x-4">
+            <Link to="/" className="hover:text-gray-200">Home</Link>
+            <Link to="/login" className="hover:text-gray-200">Login</Link>
+            <Link to="/signup" className="hover:text-gray-200">Signup</Link>
+            <Link to="/Dashboard" className="hover:text-gray-200">Dashboard</Link>
+          </nav>
         </div>
-      )}
+      </header>
+
+      {/* Main Content */}
+      <div>
+        <header className="text-center py-20 bg-gradient-to-r from-blue-700 via-blue-500 to-blue-400 text-white">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-5xl font-extrabold mb-6 leading-tight">
+              Effortless Beneficiary Management
+            </h2>
+            <p className="text-lg mb-8">
+              Manage, track, and organize your beneficiaries seamlessly with our secure platform.
+            </p>
+
+            {/* Search Input Field */}
+            <div className="flex justify-center items-center mb-8">
+              <input
+                type="text"
+                value={userId}
+                onChange={(e) => setUserId(e.target.value)}
+                placeholder="Enter User ID..."
+                className="w-2/3 p-4 bg-blue-900 text-white rounded-l-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-300 placeholder-gray-300"
+              />
+              <button
+                onClick={handleSearch}
+                className="px-6 py-4 bg-blue-600 text-white font-semibold rounded-r-lg hover:bg-blue-700 transition duration-300"
+              >
+                Search
+              </button>
+            </div>
+          </div>
+        </header>
+
+        {/* User Details Section */}
+        <div className="max-w-3xl mx-auto mt-10 p-8 bg-white shadow-lg rounded-lg">
+          {userDetails ? (
+            userDetails.error ? (
+              <p className="text-red-500 text-center text-xl">{userDetails.error}</p>
+            ) : (
+              <div className="text-gray-800">
+                <h3 className="text-2xl font-bold mb-4">User Details</h3>
+                <p><strong>Name:</strong> {userDetails.name}</p>
+                <p><strong>Age:</strong> {userDetails.age}</p>
+                <p><strong>Email:</strong> {userDetails.email}</p>
+              </div>
+            )
+          ) : (
+            <p className="text-gray-500 text-center text-lg">Enter a User ID to view details.</p>
+          )}
+        </div>
+      </div>
     </div>
   );
-};
+}
 
 export default Home;
