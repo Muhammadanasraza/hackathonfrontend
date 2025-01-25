@@ -1,15 +1,17 @@
 import { useState } from "react";
 import { FaTachometerAlt, FaUsers, FaFileAlt, FaCog, FaTimes, FaBars } from "react-icons/fa";
 import AdminReportsPage from "./AdminReportsPage";
-import UsersPage from "./UsersPage";
+import AddUser from "./AddUser";
 import NewBeneficiary from "./NewBenificiary";
+import AllBeneficiary from "./AllBeneficiary";
 
 const mockData = {
   dashboard:  <AdminReportsPage/>,
-  users: <UsersPage/>,
+  users: <AddUser/>,
   reports: "Reports: Analyze data and export reports.",
   settings: "Settings: Configure your application preferences.",
-  NewBeneficiary:<NewBeneficiary/>
+  NewBeneficiary:<NewBeneficiary/>,
+  AllBeneficiary:<AllBeneficiary/>
 };
 
 function Dashboard() {
@@ -21,7 +23,8 @@ function Dashboard() {
     { name: "users", label: "Users", icon: <FaUsers /> },
     { name: "reports", label: "Reports", icon: <FaFileAlt /> },
     { name: "settings", label: "Settings", icon: <FaCog /> },
-    { name: "NewBeneficiary", label: "NewBeneficiary", icon: <FaUsers /> }
+    { name: "NewBeneficiary", label: "NewBeneficiary", icon: <FaUsers /> },
+    { name: "AllBeneficiary", label: "AllBeneficiary", icon: <FaUsers /> }
   ];
 
   return (
