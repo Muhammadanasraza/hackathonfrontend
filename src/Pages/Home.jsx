@@ -19,7 +19,6 @@ function Home() {
     }
   };
 
-function Home() {
   return (
     <div>
       {/* Header Section */}
