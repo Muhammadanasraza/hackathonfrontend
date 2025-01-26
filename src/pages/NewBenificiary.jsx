@@ -8,6 +8,8 @@ function NewBeneficiary() {
     phone: ""
   });
 
+  const [qrCode, setQrCode] = useState("");
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -16,6 +18,9 @@ function NewBeneficiary() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form Submitted", formData);
+    const qrData = `Name: ${formData.name}, Email: ${formData.email}, CNIC: ${formData.cnic}, Phone: ${formData.phone}`;
+    const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrData)}`;
+    setQrCode(qrCodeUrl);
     // Add API call here to send data to backend
   };
 
@@ -87,6 +92,15 @@ function NewBeneficiary() {
           Add Beneficiary
         </button>
       </form>
+
+      {qrCode && (
+        <div className="mt-6 text-center">
+          <h3 className="text-lg font-bold text-gray-800">QR Code for Beneficiary</h3>
+          <div className="mt-4">
+            <img src={qrCode} alt="QR Code" className="mx-auto border p-2" />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

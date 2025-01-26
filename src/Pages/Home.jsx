@@ -31,6 +31,7 @@ function Home() {
             <Link to="/" className="hover:text-gray-200">Home</Link>
             <Link to="/login" className="hover:text-gray-200">Login</Link>
             <Link to="/signup" className="hover:text-gray-200">Signup</Link>
+            <Link to="/Dashboard" className="hover:text-gray-200">Dashboard</Link>
           </nav>
         </div>
       </header>
