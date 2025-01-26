@@ -9,10 +9,11 @@ function NewBeneficiary() {
     address: "",
     purpose: "",
     itemRequested: "",
-    itemStatus: "Pending"
+    itemStatus: "Pending",
   });
 
   const [qrCode, setQrCode] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const receiptRef = useRef();
 
   const handleChange = (e) => {
@@ -20,11 +21,39 @@ function NewBeneficiary() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Generate QR Code URL
     const qrData = `Name: ${formData.name}, CNIC: ${formData.cnic}, Phone: ${formData.phone}, Address: ${formData.address}, Purpose: ${formData.purpose}, Item Requested: ${formData.itemRequested}, Item Status: ${formData.itemStatus}`;
     const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrData)}`;
     setQrCode(qrCodeUrl);
+
+    // POST Data to the API
+    setIsSubmitting(true);
+    try {
+      const response = await fetch("http://localhost:4000/api/beneficiaries", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        alert("Beneficiary added successfully!");
+        console.log("Response:", data);
+      } else {
+        console.error("Failed to submit data:", response.statusText);
+        alert("Failed to add beneficiary. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error occurred:", error);
+      alert("An error occurred while submitting the form.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const downloadPdf = () => {
@@ -42,7 +71,7 @@ function NewBeneficiary() {
   };
 
   return (
-    <div className="flex  gap-6 p-6">
+    <div className="flex gap-6 p-6">
       {/* Form Section */}
       <div className="w-full lg:w-1/2 bg-white p-6 rounded shadow-md">
         <h2 className="text-2xl font-bold mb-4 text-gray-800">Add New Beneficiary</h2>
@@ -134,9 +163,12 @@ function NewBeneficiary() {
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
+            disabled={isSubmitting}
+            className={`w-full py-2 px-4 rounded ${
+              isSubmitting ? "bg-gray-400" : "bg-blue-600 hover:bg-blue-700"
+            } text-white`}
           >
-            Generate Receipt
+            {isSubmitting ? "Submitting..." : "Generate Receipt"}
           </button>
         </form>
       </div>
@@ -146,15 +178,14 @@ function NewBeneficiary() {
         <div className="w-full lg:w-1/2 bg-white p-6 rounded shadow-md" ref={receiptRef}>
           <h2 className="text-xl font-bold mb-4 text-gray-800">Beneficiary Receipt</h2>
           <p>
-
-          <p><strong>CNIC:</strong> {formData.cnic}</p>
-          <p><strong>Name:</strong> {formData.name}</p>
-          <p><strong>Phone:</strong> {formData.phone}</p>
-          <p><strong>Address:</strong> {formData.address}</p>
-          <p><strong>Purpose:</strong> {formData.purpose}</p>
-          <p><strong>Item Requested:</strong> {formData.itemRequested}</p>
+            <p><strong>CNIC:</strong> {formData.cnic}</p>
+            <p><strong>Name:</strong> {formData.name}</p>
+            <p><strong>Phone:</strong> {formData.phone}</p>
+            <p><strong>Address:</strong> {formData.address}</p>
+            <p><strong>Purpose:</strong> {formData.purpose}</p>
+            <p><strong>Item Requested:</strong> {formData.itemRequested}</p>
+            <p><strong>Item Status:</strong> {formData.itemStatus}</p>
           </p>
-          <p><strong>Item Status:</strong> {formData.itemStatus}</p>
           <div className="mt-4">
             <img src={qrCode} alt="QR Code" className="border p-2" />
           </div>
