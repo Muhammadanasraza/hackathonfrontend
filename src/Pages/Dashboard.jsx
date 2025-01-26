@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import { FaTachometerAlt, FaUsers, FaCog, FaTimes, FaBars } from "react-icons/fa";
-import AddUser from "./AddUser";
-import AllUser from "./AllUser";
-import AdminReportsPage from "./AdminReportsPage";
-import AllBeneficiary from "./AllBeneficiary";
+import AddUser from "../Pages/AddUser";
+import AllUser from "../Pages/AllUser";
+import AdminReportsPage from "../Pages/AdminReportsPage";
+import AllBeneficiary from "../Pages/AllBeneficiary";
 import NewBeneficiary from "../Pages/NewBenificiary"
 const mockData = {
     AdminReportsPage: <AdminReportsPage />,
