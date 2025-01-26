@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import { FaTachometerAlt, FaUsers, FaCog, FaTimes, FaBars } from "react-icons/fa";
+import NewBeneficiary from "./NewBenificiary";
 import AddUser from "./AddUser";
 import AllUser from "./AllUser";
 import AdminReportsPage from "./AdminReportsPage";
 import AllBeneficiary from "./AllBeneficiary";
-import NewBeneficiary from "./NewBenificiary"
 
 const mockData = {
     AdminReportsPage: <AdminReportsPage />,
@@ -72,9 +72,9 @@ function Dashboard() {
                         <button className="bg-blue-500 px-4 py-2 mx-2 rounded text-white">
                             Logout
                         </button>
-                        {/* <button className="bg-blue-500 px-4 py-2 rounded text-white">
+                        <button className="bg-blue-500 px-4 py-2 rounded text-white">
                             <a href="/">Home</a>
-                        </button> */}
+                        </button>
                     </div>
                 </div>
 
