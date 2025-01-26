@@ -1,12 +1,11 @@
-
-
 import { useState } from "react";
 import { FaTachometerAlt, FaUsers, FaCog, FaTimes, FaBars } from "react-icons/fa";
 import AddUser from "../Pages/AddUser.jsx";
 import AllUser from "../Pages/AllUser.jsx";
 import AdminReportsPage from "../Pages/AdminReportsPage.jsx";
 import AllBeneficiary from "../Pages/AllBeneficiary.jsx";
-import NewBeneficiary from "../Pages/NewBenificiary.jsx"
+import NewBeneficiary from "../Pages/NewBeneficiary.jsx";
+
 const mockData = {
     AdminReportsPage: <AdminReportsPage />,
     NewBeneficiary: <NewBeneficiary />,
@@ -81,7 +80,11 @@ function Dashboard() {
                     <h1 className="text-2xl font-bold text-gray-800 mb-4">
                         {tabs.find((tab) => tab.name === activeTab)?.label}
                     </h1>
-                    <div className="text-gray-600">{mockData[activeTab]}</div>
+                    <div className="text-gray-600">
+                        {mockData[activeTab] || (
+                            <div className="text-red-500">Component not found for {activeTab}</div>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>
