@@ -20,7 +20,7 @@ function AddUser() {
   };
 
   return (
-    <div className="max-w-lg mx-auto mt-8 bg-white p-6 rounded shadow-md">
+    <div className="max-w-lg  mt-8 bg-white p-6 rounded shadow-md">
       <h2 className="text-2xl font-bold mb-4 text-gray-800">Add New User</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Name Field */}

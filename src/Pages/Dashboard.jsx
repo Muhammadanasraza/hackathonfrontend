@@ -35,10 +35,10 @@ function Dashboard() {
             <div
                 className={`${
                     isSidebarOpen ? "w-64" : "w-16"
-                } bg-white shadow-md transition-all duration-300 flex flex-col`}
+                } bg-blue-200 shadow-md transition-all duration-300 flex flex-col`}
             >
-                <div className="p-4 flex items-center justify-between">
-                    {isSidebarOpen && <h1 className="text-xl font-bold text-gray-800">Menu</h1>}
+                <div className="p-5 flex bg-blue-500 items-center justify-between">
+                    {isSidebarOpen && <h1 className="text-xl font-bold text-gray-200">Menu</h1>}
                     <button
                         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
                         className="focus:outline-none text-gray-600 hover:bg-gray-200 rounded-full p-2"
@@ -66,15 +66,15 @@ function Dashboard() {
             {/* Main Content */}
             <div className="flex-1 flex flex-col">
                 {/* Navbar */}
-                <div className="bg-blue-500 text-white p-4 flex items-center justify-between shadow-md">
+                <div className="bg-blue-300 text-white p-4 flex items-center justify-between shadow-md">
                     <div className="text-xl font-bold">My Dashboard</div>
                     <div>
-                        <button className="bg-blue-700 px-4 py-2 mx-2 rounded text-white">
+                        <button className="bg-blue-500 px-4 py-2 mx-2 rounded text-white">
                             Logout
                         </button>
-                        <button className="bg-blue-700 px-4 py-2 rounded text-white">
+                        {/* <button className="bg-blue-500 px-4 py-2 rounded text-white">
                             <a href="/">Home</a>
-                        </button>
+                        </button> */}
                     </div>
                 </div>
 

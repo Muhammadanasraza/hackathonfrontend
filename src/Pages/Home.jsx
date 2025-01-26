@@ -23,7 +23,7 @@ function Home() {
     <div>
       {/* Header Section */}
       <header className="bg-blue-500 text-white py-4">
-        <div className="max-w-7xl mx-auto flex justify-between items-center px-6">
+        <div className="max-w-8xl mx-auto flex justify-between items-center px-6">
           <h1 className="text-2xl font-bold">Beneficiary Management</h1>
 
           {/* Navigation Buttons */}
@@ -38,7 +38,7 @@ function Home() {
 
       {/* Main Content */}
       <div>
-        <header className="text-center py-20 bg-gradient-to-r from-blue-700 via-blue-500 to-blue-400 text-white">
+        <header className="text-center py-20 bg-gradient-to-r from-blue-200 via-blue-400 to-blue-400 text-white">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-5xl font-extrabold mb-6 leading-tight">
               Effortless Beneficiary Management
