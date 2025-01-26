@@ -1,0 +1,56 @@
+// Utility functions for generating chart data and colors
+
+const Utils = {
+  // Generate random numbers within a range
+  numbers: ({ count, min, max }) => {
+    const randomNumbers = [];
+    for (let i = 0; i < count; i++) {
+      randomNumbers.push(Math.floor(Math.random() * (max - min + 1)) + min);
+    }
+    return randomNumbers;
+  },
+
+  // Generate an array of month labels
+  months: ({ count }) => {
+    const allMonths = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    return allMonths.slice(0, count);
+  },
+
+  // Predefined chart colors
+  CHART_COLORS: {
+    red: "rgb(255, 99, 132)",
+    blue: "rgb(54, 162, 235)",
+    green: "rgb(75, 192, 192)",
+    yellow: "rgb(255, 205, 86)",
+  },
+
+  // Create transparent versions of colors
+  transparentize: (color, opacity) => {
+    const alpha = 1 - opacity;
+    return color.replace("rgb", "rgba").replace(")", `, ${alpha})`);
+  },
+
+  // Generate a named color for a dataset
+  namedColor: (index) => {
+    const colors = Object.values(Utils.CHART_COLORS);
+    return colors[index % colors.length];
+  },
+
+  // Generate random numbers for a dataset
+  rand: (min, max) => Math.floor(Math.random() * (max - min + 1)) + min,
+};
+
+export default Utils;
