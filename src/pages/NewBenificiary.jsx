@@ -145,12 +145,15 @@ function NewBeneficiary() {
       {qrCode && (
         <div className="w-full lg:w-1/2 bg-white p-6 rounded shadow-md" ref={receiptRef}>
           <h2 className="text-xl font-bold mb-4 text-gray-800">Beneficiary Receipt</h2>
+          <p>
+
           <p><strong>CNIC:</strong> {formData.cnic}</p>
           <p><strong>Name:</strong> {formData.name}</p>
           <p><strong>Phone:</strong> {formData.phone}</p>
           <p><strong>Address:</strong> {formData.address}</p>
           <p><strong>Purpose:</strong> {formData.purpose}</p>
           <p><strong>Item Requested:</strong> {formData.itemRequested}</p>
+          </p>
           <p><strong>Item Status:</strong> {formData.itemStatus}</p>
           <div className="mt-4">
             <img src={qrCode} alt="QR Code" className="border p-2" />
