@@ -92,7 +92,6 @@ function NewBeneficiary() {
           Add Beneficiary
         </button>
       </form>
-
       {qrCode && (
         <div className="mt-6 text-center">
           <h3 className="text-lg font-bold text-gray-800">QR Code for Beneficiary</h3>
