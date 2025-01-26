@@ -3,13 +3,16 @@ import { FaTachometerAlt, FaUsers, FaFileAlt, FaCog, FaTimes, FaBars } from "rea
 import AdminReportsPage from "./AdminReportsPage";
 // import UsersPage from "./UsersPage";
 import NewBeneficiary from "./NewBenificiary";
+import AddUser from "./AddUser";
+import AllUser from "./AllUser";
+import AllBeneficiary from "./AllBeneficiary";
 
 const mockData = {
   dashboard:  <AdminReportsPage/>,
-//   users: <UsersPage/>,
-  reports: "Reports: Analyze data and export reports.",
-  settings: "Settings: Configure your application preferences.",
-  NewBeneficiary:<NewBeneficiary/>
+  NewBeneficiary:<NewBeneficiary/>,
+  AllBeneficiary:<AllBeneficiary/>,
+  Adduser:<AddUser/>,
+  AllUser:<AllUser/>
 };
 
 function Dashboard() {
@@ -18,10 +21,12 @@ function Dashboard() {
 
   const tabs = [
     { name: "dashboard", label: "Dashboard", icon: <FaTachometerAlt /> },
-    { name: "users", label: "Users", icon: <FaUsers /> },
+    { name: "Adduser", label: "Adduser", icon: <FaUsers /> },
+    { name: "AllUser", label: "AllUser", icon: <FaUsers /> },
     { name: "reports", label: "Reports", icon: <FaFileAlt /> },
     { name: "settings", label: "Settings", icon: <FaCog /> },
-    { name: "NewBeneficiary", label: "NewBeneficiary", icon: <FaUsers /> }
+    { name: "NewBeneficiary", label: "NewBeneficiary", icon: <FaUsers /> },
+    { name: "AllBeneficiary", label: "AllBeneficiary", icon: <FaUsers /> }
   ];
 
   return (
