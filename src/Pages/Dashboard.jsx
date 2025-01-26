@@ -68,7 +68,11 @@ function Dashboard() {
         {/* Navbar */}
         <div className="bg-blue-500 text-white p-4 flex items-center justify-between shadow-md">
           <div className="text-xl font-bold">My Dashboard</div>
-          <button className="bg-blue-700 px-4 py-2 rounded text-white">Logout</button>
+          <div>
+          <button className="bg-blue-700 px-4 py-2 mx-2 rounded text-white">Logout</button>
+          <button className="bg-blue-700 px-4 py-2 rounded text-white"><a href="/">Home</a></button>
+          </div>
+
         </div>
 
         <div className="p-6 flex-1">
